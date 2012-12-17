@@ -1,0 +1,23 @@
+{
+    "name": "nousefreak/nousetools",
+    "type": "library",
+    "description": "Common used classes",
+    "keywords": ["common", "classes"],
+    "homepage": "https://github.com/nousefreak/NoUseTools",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dries De Peuter",
+            "email": "dries@nousefreak.be",
+            "homepage": "http://nousefreak.be"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-0" : {
+            "NoUseTools" : "src/"
+        }
+    }
+}
