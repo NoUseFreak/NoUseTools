@@ -15,18 +15,25 @@ use Exception;
 
 class Sorter
 {
+    protected static $handlers = array();
+
     public static function sort(array &$array, $handler)
     {
-        if (is_string($handler)) {
-            $uri = 'NoUseTools\\Sort\\Handler\\' . ucfirst($handler) . 'Handler';
-            if (!class_exists($uri)) {
-                throw new Exception('Could not find handler. "' . $uri . '"');
-            }
-            $handler = new $uri();
-        }
         if (!($handler instanceof HandlerInterface)) {
             throw new Exception('Invalid handler.');
         }
         $handler->sort($array);
+    }
+
+    public static function createHandler($name)
+    {
+        $uri = 'NoUseTools\\Sort\\Handler\\' . ucfirst($name) . 'Handler';
+        if (!isset(self::$handlers[$uri])) {
+            if (!class_exists($uri)) {
+                throw new Exception('Could not find handler. "' . $uri . '"');
+            }
+            self::$handlers[$uri] = new $uri();
+        }
+        return self::$handlers[$uri];
     }
 }
